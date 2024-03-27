@@ -1,0 +1,36 @@
+---
+title: "didi_example.R"
+output: html_document
+date: "2024-03-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(devtools)
+devtools::install_github("richJJackson/didi")
+library(didi)
+```
+
+## Intro
+
+This gives a basic example of how to use the 'Didi' estimator to visualise the impact of continuous covariates on time-to-event outcomes
+
+## Simulated data
+Three covariates are required which are simulated for N=100 observations
+* Time variable: using rexp(N,0.05)
+* Censoring Indicator: using rbinom(N,1,0.1)
+* Covariate: using rnorm(N)
+
+```{r dataSim}
+  N <- 100
+  st <- rexp(N,0.05)
+  cen <- rbinom(N,1,0.1)
+  x <- rnorm(N)
+```
+
+## Including Plots
+
+```{r didiPlot, echo=FALSE}
+  didiPlot(st,cen,x)
+```
+
