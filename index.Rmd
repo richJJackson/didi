@@ -32,9 +32,9 @@ Three covariates are required which are simulated for N=100 observations
   x <- rnorm(N)
 ```
 
-## Including Plots
+## Figure
 
-```{r didiPlot, echo=FALSE}
+```{r didiPlot}
   didiPlot(st,cen,x)
 ```
 
