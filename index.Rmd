@@ -21,6 +21,7 @@ This gives a basic example of how to use the 'Didi' estimator to visualise the i
 
 ## Simulated data
 Three covariates are required which are simulated for N=100 observations
+
 * Time variable: using rexp(N,0.05)
 * Censoring Indicator: using rbinom(N,1,0.1)
 * Covariate: using rnorm(N)
@@ -38,3 +39,10 @@ Three covariates are required which are simulated for N=100 observations
   didiPlot(st,cen,x)
 ```
 
+## Details
+
+Find code at: https://github.com/richJJackson/didi
+
+## Reference
+
+Jackson RJ, Cox TF. Kernel hazard estimation for visualisation of the effect of a continuous covariate on time‐to‐event endpoints. Pharmaceutical Statistics. 2022 May;21(3):514-24.
