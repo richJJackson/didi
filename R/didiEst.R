@@ -60,6 +60,7 @@ didiEst <- function(st,cen,x,bw=5,bw.x=0.1,type="hazard",size=100){
   xMatrix <- xMatrix[,order(x)]
 
   ret<- list("time"=xdum,"cov"=x[order(x)],"xMatrix"=xMatrix)
-  ret
+  class(ret) <- "didi"
+  return(ret)
 
 }
