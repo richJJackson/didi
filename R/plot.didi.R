@@ -1,4 +1,4 @@
-plot.didi <- function(x, ...){
+plot.didi <- function(x, y=NULL, ...){
 
   #### Plotting
   zmat <-(x$xMatrix)
