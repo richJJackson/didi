@@ -1,10 +1,14 @@
-plot.didi <- function(x, y=NULL, ...){
+plot.didi <- function(x, ...){
 
-  #### Plotting
+  ###
   zmat <-(x$xMatrix)
-  n <- length(x$cov)
-  time <- x$time
-  cov <- x$cov+1e-6
-  filled.contour(time,cov,zmat)
+  z3d <- melt(zmat)
+  table(z3d$Var1)
+  z3d$time <- x$time[z3d$Var1]
+  z3d$cov <- x$cov[z3d$Var2]
+
+  ggplot(z3d, aes(time, cov, z=value)) +
+    v <- stat_contour_filled(geom="contour_filled")
+  v
 
 }

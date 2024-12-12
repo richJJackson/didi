@@ -28,9 +28,10 @@ Three covariates are required which are simulated for N=100 observations
   x <- rnorm(N)
 ```
 
-## Including Plots
+## Calculate the double weighted kernel (Didi) estimator
+
 
 ```{r didiPlot, echo=FALSE}
-  didiPlot(st,cen,x)
+  didi <- didiEst(st,cen,x)
 ```
 

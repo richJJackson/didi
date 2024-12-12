@@ -1,4 +1,4 @@
-didiEst <- function(st,cen,x,bw=5,bw.x=0.1,type="hazard",size=100){
+didiEst <- function(st,cen,x,bw=5,bw.x=0.1,type="survival",size=100){
 
   ## Creating requiredquantities
   nn <- length(st);nn
