@@ -6,9 +6,10 @@ date: "2024-03-27"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(devtools)
-devtools::install_github("richJJackson/didi")
-library(didi)
+devtools::load_all()
+library(survival)
+library(reshape2)
+library(ggplot2)
 ```
 
 ## Intro
@@ -16,22 +17,64 @@ library(didi)
 This gives a basic example of how to use the 'Didi' estimator to visualise the impact of continuous covariates on time-to-event outcomes
 
 ## Simulated data
-Three covariates are required which are simulated for N=100 observations
-* Time variable: using rexp(N,0.05)
-* Censoring Indicator: using rbinom(N,1,0.1)
-* Covariate: using rnorm(N)
+Three covariates are required which are simulated for N=500 observations using 
+rnorm(N, 8,2).  We then generate a hazard parameter based on a the following sigmoid formula:
+
+h = 0.01 + 1/(20+exp(-a(x-b)))
+
+with parametes a=2 and b=9 used.  Based on this we generate survival time data
+from an exponential distribution with hazard parameter h.  A basic censoring
+indicator is generated using 'rbinom(N,1,0.7)`
+
 
 ```{r dataSim}
-  N <- 100
-  st <- rexp(N,0.05)
-  cen <- rbinom(N,1,0.1)
-  x <- rnorm(N)
+  set.seed(041084)
+  N <- 500
+  x <- rnorm(N,8,2)
+  
+  a <- 2
+  b <- 9
+  lam <- 0.01+ 1/(20+exp(-a*(x-b)))
+  st <- rexp(N,lam)
+  cen <- rbinom(N,1,0.7)
+
+  plot(x,lam,main="plot of simulated realtionship between a covariate (x)
+         and the hazard rate parameter")
 ```
 
 ## Calculate the double weighted kernel (Didi) estimator
 
 
 ```{r didiPlot, echo=FALSE}
-  didi <- didiEst(st,cen,x)
+didi <- didiEst(st,cen,x,bw.x=0.66,bw=3)
 ```
+
+
+```{r}
+plot.didi(didi)
+```
+
+
+## Example
+
+To get an idea of how this compares to a standard Kaplan Meir plot we can 
+dichotomise 'x'
+
+```{r}
+
+xn <- cut(x,c(0,8,Inf),c("low","high"));table(xn)
+sfit <- survfit(Surv(st,cen)~xn)
+plot(sfit,col=c(2,4),lwd=4)
+```
+
+
+## Details
+
+Find code at: https://github.com/richJJackson/didi
+
+## Reference
+
+Jackson RJ, Cox TF. Kernel hazard estimation for visualisation of the effect of a continuous covariate on time‐to‐event endpoints. Pharmaceutical Statistics. 2022 May;21(3):514-24.
+
+
 
