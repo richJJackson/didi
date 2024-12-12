@@ -10,6 +10,13 @@ didiEst <- function(st,cen,x,bw=NULL,bw.x=NULL,type="survival",size=100){
   x <- x[ord]
   cen.id <- which(cen==0)
 
+  ### Setting estimation parameters
+  ST <- st[-cen.id]
+  CE <- NULL
+  mat <- mat[,-cen.id]
+  xdum <- seq(0,max(ST),length= size)
+
+
   ### Setting bw parameters
   if(is.null(bw)) bw <- sd(st,na.rm=T)/4
   if(is.null(bw.x)) bw.x <- sd(x,na.rm=T)/4
@@ -21,11 +28,6 @@ didiEst <- function(st,cen,x,bw=NULL,bw.x=NULL,type="survival",size=100){
   ## Getting censoring weights
   mat <- kernEst(st,xdum,bw=bw)
   wcen <- cenWeight(cen.id,nn)
-
-  ST <- st[-cen.id]
-  CE <- NULL
-  mat <- mat[,-cen.id]
-  xdum <- seq(0,max(ST),length= size)
 
   #wmat <- t(matrix(CE,length(ST),1000))
   #nn <- length(st[-cen.id])

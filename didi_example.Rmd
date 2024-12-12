@@ -6,7 +6,7 @@ date: "2024-03-27"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-devtools::load_all()
+library(didi)
 library(survival)
 library(reshape2)
 library(ggplot2)
