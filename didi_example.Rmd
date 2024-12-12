@@ -20,7 +20,7 @@ This gives a basic example of how to use the 'Didi' estimator to visualise the i
 Three covariates are required which are simulated for N=500 observations using 
 rnorm(N, 8,2).  We then generate a hazard parameter based on a the following sigmoid formula:
 
-h = 0.01 + 1/(20+exp(-a(x-b)))
+h = 0.04 + 1/(6+exp(-a(x-b)))
 
 with parametes a=2 and b=9 used.  Based on this we generate survival time data
 from an exponential distribution with hazard parameter h.  A basic censoring
@@ -34,9 +34,9 @@ indicator is generated using 'rbinom(N,1,0.7)`
   
   a <- 2
   b <- 9
-  lam <- 0.01+ 1/(20+exp(-a*(x-b)))
+  lam <- 0.04 + 1/(6+exp(-a*(x-b)))
   st <- rexp(N,lam)
-  cen <- rbinom(N,1,0.7)
+  cen <- rbinom(N,1,0.55)
 
   plot(x,lam,main="plot of simulated realtionship between a covariate (x)
          and the hazard rate parameter")
@@ -46,7 +46,7 @@ indicator is generated using 'rbinom(N,1,0.7)`
 
 
 ```{r didiPlot, echo=FALSE}
-didi <- didiEst(st,cen,x,bw.x=0.66,bw=3)
+didi <- didiEst(st,cen,x,bw.x=0.75,bw=1)
 ```
 
 
