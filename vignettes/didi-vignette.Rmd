@@ -1,11 +1,22 @@
 ---
-title: "didi_example.R"
-output: html_document
-date: "2024-03-27"
+title: "didi-vignette"
+author: "Richard Jackson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{didi-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height= 5
+)
+
 library(didi)
 library(survival)
 library(reshape2)
@@ -51,7 +62,7 @@ didi <- didiEst(st,cen,x,bw.x=0.75,bw=1)
 
 
 ```{r}
-plot.didi(didi)
+plot(didi)
 ```
 
 

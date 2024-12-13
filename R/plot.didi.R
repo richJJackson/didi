@@ -6,6 +6,7 @@
 #' @param x an object of class "didi"
 #' @param ylab a text input fo the y axis
 #' @param xlab a text input fo the x axis
+#' @param ... not used
 #' @details This takes the inputs of the "didi" object and plots them using a
 #' filled contour plot.  This makes use of the stat_contour_filled option within
 #' ggplot 2
@@ -14,7 +15,10 @@
 #' @export
 plot.didi <- function(x,ylab="cov",xlab="time", ...){
 
-  ###
+  # binding global variables
+  time <- cov <- value <- NULL
+
+  ### reshaping matrix
   zmat <-(x$xMatrix)
   z3d <- melt(zmat)
   table(z3d$Var1)

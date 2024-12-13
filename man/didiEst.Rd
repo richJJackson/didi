@@ -17,6 +17,9 @@ didiEst(st, cen, x, bw = NULL, bw.x = NULL, type = "survival", size = 100)
 
 \item{bw.x}{a bandwidth parameter for the covariate}
 
+\item{type}{type of estimator to be provided either cumulative hazard or
+survival, defaults to survival}
+
 \item{size}{a parameter setting the number of points at which the kernals
 should be evaluated.  Default to 100.}
 }

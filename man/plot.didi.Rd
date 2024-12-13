@@ -12,6 +12,8 @@
 \item{ylab}{a text input fo the y axis}
 
 \item{xlab}{a text input fo the x axis}
+
+\item{...}{not used}
 }
 \value{
 A ggplot object giving the filled contour plot

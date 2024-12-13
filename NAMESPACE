@@ -2,5 +2,8 @@
 
 S3method(plot,didi)
 export(didiEst)
+export(didiPlot)
 import(ggplot2)
+import(graphics)
 import(reshape2)
+import(stats)

@@ -10,6 +10,8 @@
 #' @param bw.x a bandwidth parameter for the covariate
 #' @param size a parameter setting the number of points at which the kernals
 #' should be evaluated.  Default to 100.
+#' @param type type of estimator to be provided either cumulative hazard or
+#' survival, defaults to survival
 #' @details This performs the procedure which estimates the kernel density of a
 #' set of data points, x at a set of evaluation points y.  The function creates
 #' a grid with of equal points of length 'size' between 0 and the maximum
@@ -19,9 +21,13 @@
 #' * time: a vector specifying at which times the estimator was evaluated
 #' * cov: a vector specifying at which covariate values the estimator was evaluated
 #' * xMatrix: a matrix supplying the double weighted kernel estimators
-#' @import reshape2
+#' @import reshape2 stats
 #' @export
 didiEst <- function(st,cen,x,bw=NULL,bw.x=NULL,type="survival",size=100){
+
+
+  # binding variables
+  time <- cov <- value <-   NULL
 
   ## Ensuring x is a continuous covariate
   x <- as.numeric(as.character(x))
