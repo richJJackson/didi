@@ -2,7 +2,7 @@ Package: didi
 Type: Package
 Title: Estimates the Double Weighted Kernel Hazard (Didi) Estimator and Plots 
     the Results
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: person("Richard", "Jackson", ,"richj23@liverpool.ac.uk", role = c("aut", "cre","cph"))
 Description: Functions for estimating a hazard function using a weighted kernel 
     procedure and how this can be used to visualise the impact of continuous 
