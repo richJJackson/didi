@@ -9,3 +9,4 @@ Description: Functions for estimating a hazard function using a weighted kernel 
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.2

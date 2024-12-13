@@ -1,4 +1,30 @@
+#' Function to perform kernel estimation using normally distributed kernels.
+#'
+#' This function to produce the 'Didi' estimator.  A double weighted kernel
+#' estimator of the survival function in the presence of a continuous covariate.
+#'
+#' @param st a vector of survival times
+#' @param cen a vector of censoring indicators
+#' @param x a vector contianing a continuous covariate
+#' @param bw a bandwidth parameter for time
+#' @param bw.x a bandwidth parameter for the covariate
+#' @param size a parameter setting the number of points at which the kernals
+#' should be evaluated.  Default to 100.
+#' @details This performs the procedure which estimates the kernel density of a
+#' set of data points, x at a set of evaluation points y.  The function creates
+#' a grid with of equal points of length 'size' between 0 and the maximum
+#' observed event time.  The kernel estimator is then evaluated at each unique
+#' covariate value
+#' @returns A object of class "didi" containing
+#' * time: a vector specifying at which times the estimator was evaluated
+#' * cov: a vector specifying at which covariate values the estimator was evaluated
+#' * xMatrix: a matrix supplying the double weighted kernel estimators
+#' @import reshape2
+#' @export
 didiEst <- function(st,cen,x,bw=NULL,bw.x=NULL,type="survival",size=100){
+
+  ## Ensuring x is a continuous covariate
+  x <- as.numeric(as.character(x))
 
   ## Creating requiredquantities
   nn <- length(st);nn
@@ -43,7 +69,6 @@ didiEst <- function(st,cen,x,bw=NULL,bw.x=NULL,type="survival",size=100){
 
     xdis <- dnorm(x,x0,bw.x);
     xdis <- xdis*(nn/sum(xdis))
-    #xdis <- xdis*(1/xdis[i])
 
     wcen <- cenWeight(cen.id,nn,dist=xdis);wcen
 
@@ -54,7 +79,7 @@ didiEst <- function(st,cen,x,bw=NULL,bw.x=NULL,type="survival",size=100){
     ### Getting Kernal Estimates
     fhat <- rowSums(mat*wmat)
 
-    ### Hazard estimation
+    ### Hazard estimation
     Fhat <- cumsum(fhat)/sum(fhat,na.rm=T)*scl
     Shat <- 1 - Fhat
     hhat <- fhat/Shat
